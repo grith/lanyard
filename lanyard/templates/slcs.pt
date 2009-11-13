@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal">
+    <span metal:use-macro="main.macros['master']">
+      <div id="content" metal:fill-slot="content">
+	<div class="post">
+	  <h1 class="title" >SLCS Certificate</h1>
+	<p tal:condition="certificate">
+	<div class="certificate">
+	${cn}
+	</div>
+	<div class="meta"><p class="byline">Expires: ${not_after}</p></div>
+      
+	</p>
+	<p tal:condition="not certificate">Seems you currently don't have a certificate attached to lanyard.</p>
+	</div>
+      </div>
+      <div metal:fill-slot="sidebar">
+	<h2>Navigation</h2>
+	<ul>
+	  <li><a href="${request.url}request.html">Request Certificate</a></li>
+	</ul>
+      </div>
+    </span>
+</html>
