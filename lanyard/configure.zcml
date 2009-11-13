@@ -4,40 +4,40 @@
   <include package="repoze.bfg.includes" />
 
   <view
-     for=".models.Root"
-     view=".views.default"
-     renderer="templates/lanyard.pt"
-     />
+    for=".models.Root"
+    view=".views.lanyard.default"
+    renderer="templates/lanyard.pt"
+    />
 
   <view
-     for=".models.SLCS"
-     view=".views.slcs"
-     renderer="templates/slcs.pt"
-     />
+    for=".models.SLCS"
+    view=".views.slcs.default"
+    renderer="templates/slcs.pt"
+    />
 
   <view
-     for=".models.SLCS"
-     view=".views.slcs_request"
-     name="request.html"
-     />
+    for=".models.SLCS"
+    view=".views.slcs.request"
+    name="request.html"
+    />
 
   <view
-     for=".models.SLCS"
-     view=".views.slcs_response"
-     name="response.html"
-     request_type="POST"
-     />
+    for=".models.SLCS"
+    view=".views.slcs.response"
+    name="response.html"
+    request_type="POST"
+    />
 
   <view
-     for=".models.MyProxy"
-     view=".views.myproxy"
-     renderer="templates/myproxy.pt"
-     />
+    for=".models.MyProxy"
+    view=".views.myproxy.default"
+    renderer="templates/myproxy.pt"
+    />
 
   <view
-   for=".models.Root"
-   view=".views.static_view"
-   name="static"
-   />
+    for=".models.Root"
+    view=".views.static.static_view"
+    name="static"
+    />
 
 </configure>
