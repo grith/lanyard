@@ -10,7 +10,6 @@ body {
 	background: url(images/img01.gif) repeat-x left top;
 	font-size: 13px;
 	font-family: "Trebuchet MS", Georgia, "Times New Roman", Times, serif;
-	text-align: justify;
 	color: #FFFFFF;
 }
 
@@ -196,8 +195,6 @@ input, textarea, select {
 /* Content */
 
 #content {
-	float: left;
-	width: 410px;
 	
 }
 
@@ -230,7 +227,7 @@ input, textarea, select {
 }
 
 .post .meta {
-	padding: 15px 15px 30px 0px;
+	padding: 5px 15px 30px 0px;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 11px;
 }
@@ -248,6 +245,7 @@ input, textarea, select {
 
 .post .meta .links {
 	float: right;
+	padding-right: 5em;
 }
 
 .post .meta .more {

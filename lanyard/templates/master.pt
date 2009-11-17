@@ -31,6 +31,11 @@
 <div id="wrapper">
   <!-- start page -->
   <div id="page" metal:define-slot="page">
+    <!-- start sidebar -->
+    <div id="sidebar">
+      <div metal:define-slot="sidebar"></div>
+    </div>
+    <!-- end sidebar -->
     <!-- start content -->
     <div id="content" metal:define-slot="content">
       <div class="post">
@@ -40,11 +45,6 @@
       </div>
     </div>
     <!-- end content -->
-    <!-- start sidebar -->
-    <div id="sidebar">
-      <div metal:define-slot="sidebar"></div>
-    </div>
-    <!-- end sidebar -->
     <div style="clear: both;">&nbsp;</div>
   </div>
 </div>
