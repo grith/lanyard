@@ -35,23 +35,7 @@ def default(context, request):
         certificate = root.slcs.get(session)
         data['myproxyinfo'] = None
         if certificate:
-            myproxyinfo = context.myproxy_info(certificate)
-            if myproxyinfo:
-                # XXX dirty hack to support nameless creds
-                if not myproxyinfo.has_key('CRED_NAME'): myproxyinfo['CRED_NAME'] = ''
-                creds = [{'CRED_START_TIME':myproxyinfo['CRED_START_TIME'],
-                          'CRED_END_TIME': myproxyinfo['CRED_END_TIME'],
-                          'CRED_OWNER': myproxyinfo['CRED_OWNER'],
-                          'CRED_NAME': myproxyinfo['CRED_NAME'],
-                          'CRED_RETRIEVER': myproxyinfo['CRED_RETRIEVER'],}]
-                if myproxyinfo.has_key('ADDL_CREDS'):
-                    for cred in myproxyinfo['ADDL_CREDS'].split(','):
-                        creds.append({'CRED_START_TIME':myproxyinfo['CRED_%s_START_TIME' % cred],
-                                      'CRED_END_TIME': myproxyinfo['CRED_%s_END_TIME' % cred],
-                                      'CRED_NAME': cred,
-                                      'CRED_OWNER': myproxyinfo['CRED_%s_OWNER' % cred],
-                                      'CRED_RETRIEVER': myproxyinfo['CRED_%s_RETRIEVER' % cred],})
-                data['myproxyinfo'] = creds
+            data['myproxyinfo'] = context.myproxy_info(certificate)
 
         proxies = context.get(session)
         data['proxies'] = proxies

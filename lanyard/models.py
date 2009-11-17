@@ -81,7 +81,22 @@ class Proxies(Base):
         username = dn.split(',')[-1:][0].strip().split('=',1)[1].replace(' ','_')
 
         respCode, errorTxt, field = c.info(username, certificate, certificate.get_key()._key, lambda *a: passphrase)
-        return field
+        if field:
+            # XXX dirty hack to support nameless creds
+            if not field.has_key('CRED_NAME'): field['CRED_NAME'] = ''
+            creds = [{'CRED_START_TIME':field['CRED_START_TIME'],
+                      'CRED_END_TIME': field['CRED_END_TIME'],
+                      'CRED_OWNER': field['CRED_OWNER'],
+                      'CRED_NAME': field['CRED_NAME'],
+                      'CRED_RETRIEVER': field['CRED_RETRIEVER'],}]
+            if field.has_key('ADDL_CREDS'):
+                for cred in field['ADDL_CREDS'].split(','):
+                    creds.append({'CRED_START_TIME':field['CRED_%s_START_TIME' % cred],
+                                  'CRED_END_TIME': field['CRED_%s_END_TIME' % cred],
+                                  'CRED_NAME': cred,
+                                  'CRED_OWNER': field['CRED_%s_OWNER' % cred],
+                                  'CRED_RETRIEVER': field['CRED_%s_RETRIEVER' % cred],})
+        return creds
 
 
     def myproxy_destroy(self, certificate, credname):
