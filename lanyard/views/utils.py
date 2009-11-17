@@ -28,13 +28,14 @@ from repoze.bfg.url import model_url
 from repoze.bfg.traversal import find_root
 from repoze.bfg.chameleon_zpt import get_template
 
+
 def get_base_data(context, request):
     main = get_template('../templates/master.pt')
     data = {'main': main, 'project': 'lanyard'}
     home_node = find_root(context)
     data['navitems'] = [{'href': model_url(home_node, request), 'title': 'Home', 'state':''},
                         {'href': model_url(home_node.slcs, request), 'title': home_node.slcs.__name__.upper(), 'state':('', 'current_page_item')[home_node.slcs == context]},
-                        {'href': model_url(home_node.myproxy, request), 'title': 'MyProxy', 'state':('', 'current_page_item')[home_node.myproxy == context]},
+                        {'href': model_url(home_node.proxies, request), 'title': 'MyProxy', 'state':('', 'current_page_item')[home_node.proxies == context]},
                        ]
     return data
 

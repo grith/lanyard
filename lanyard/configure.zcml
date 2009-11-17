@@ -29,9 +29,22 @@
     />
 
   <view
-    for=".models.MyProxy"
-    view=".views.myproxy.default"
+    for=".models.Proxies"
+    view=".views.proxies.default"
     renderer="templates/myproxy.pt"
+    />
+
+  <view
+    for=".models.Proxies"
+    view=".views.proxies.put"
+    renderer="templates/put.pt"
+    name="put.html"
+    />
+
+  <view
+    for=".models.Proxies"
+    view=".views.proxies.destroy"
+    name="destroy.html"
     />
 
   <view

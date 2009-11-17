@@ -3,7 +3,42 @@
   xmlns:tal="http://xml.zope.org/namespaces/tal"
   xmlns:metal="http://xml.zope.org/namespaces/metal">
     <span metal:use-macro="main.macros['master']">
-      <div metal:fill-slot="menu"><li><a>Item</a></li></div>
-     <span metal:fill-slot="name">Chris</span>
+      <div id="content" metal:fill-slot="content">
+      <div class="post">
+        <h1 class="title" >Proxies</h1>
+        <p tal:condition="myproxyinfo">
+        <div class="proxies">
+        ${proxies}
+        </div>
+        <div class="myproxy">
+          <div class="proxy post" tal:repeat="proxy myproxyinfo">
+            <dl>
+              <dt>Name:</dt>
+              <dd tal:condition="proxy.CRED_NAME" tal:content="proxy.CRED_NAME"></dd>
+              <dd tal:condition="not proxy.CRED_NAME"><b>Default</b></dd>
+              <dt>Retrievers:</dt>
+              <dd tal:content="proxy.CRED_RETRIEVER"></dd>
+              <dt>Owner:</dt>
+              <dd tal:content="proxy.CRED_OWNER"></dd>
+            </dl>
+            <div class="meta">
+              <p class="links">
+              <a tal:attributes="href string:destroy.html?credname=${proxy.CRED_NAME}" href="">Destroy</a>
+              </p>
+              <p class="byline" tal:content="string:Expires: ${proxy.CRED_END_TIME}"></p></div>
+            <hr/>
+          </div>
+        </div>
+        </p>
+        <p tal:condition="not myproxyinfo">Seems you currently don't have a proxies in MyProxy.</p>
+        </div>
+      </div>
+      <div metal:fill-slot="sidebar">
+      <h2>Navigation</h2>
+      <ul>
+        <li><a href="${request.url}put.html">Put a certificate in MyProxy</a></li>
+      </ul>
+      </div>
+
     </span>
 </html>

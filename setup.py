@@ -32,6 +32,7 @@ setup(name='lanyard',
       install_requires=[
             'repoze.bfg',
             'pycrypto',
+            'zope.httpform',
             ],
       tests_require=[
             'repoze.bfg',
