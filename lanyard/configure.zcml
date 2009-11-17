@@ -53,4 +53,17 @@
     name="static"
     />
 
+  <subscriber
+    for="repoze.bfg.interfaces.INewRequest"
+    handler=".subscribers.categorize_request"
+    />
+
+  <view
+   for=".models.SLCS"
+   request_type=".interfaces.IJSONRequest"
+   view=".views.slcs.json_default"
+   renderer="json"
+   />
+
+
 </configure>

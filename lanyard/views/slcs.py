@@ -31,6 +31,8 @@ from repoze.bfg.url import model_url
 from repoze.bfg.settings import get_settings
 
 from utils import get_shib_session, get_base_data
+import json
+
 
 def default(context, request):
     session = get_shib_session(request)
@@ -84,4 +86,23 @@ def response(context, request):
     return HTTPFound(location=model_url(context, request))
 
 
+def json_default(context, request):
+    data = {}
+    if not (request.host.startswith('localhost:')) or (request.host.startswith('127.0.0.1:')):
+        return {'response': 'Error', 'message': 'invalid request'}
+
+    if request.method == 'POST':
+        try:
+            args = json.loads(request.body)
+        except ValueError:
+            return {'response': 'Error', 'message': 'invalid request'}
+
+        cert = context.get(args['session'])
+        if cert:
+            data['response'] = 'Ok'
+            data['certificate'] = repr(cert)
+            data['key'] = str(cert.get_key())
+        else:
+            data['response'] = 'No Certificate'
+    return data
 
