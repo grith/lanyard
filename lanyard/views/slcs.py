@@ -50,7 +50,7 @@ def default(context, request):
 
 def request(context, request):
     request.environ['wsgi.url_scheme'] = 'https'
-    return HTTPFound(location='https://slcstest.arcs.org.au/SLCS/token?service=' + model_url(context, request) + 'response.html')
+    return HTTPFound(location=get_settings()["slcs_url"] + '/token?service=' + model_url(context, request) + 'response.html')
 
 
 def response(context, request):
