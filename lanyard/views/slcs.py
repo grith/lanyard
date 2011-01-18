@@ -37,6 +37,7 @@ import json
 def default(context, request):
     session = get_shib_session(request)
     data = get_base_data(context, request)
+    data['certificate'] = None
     if session:
         cert = context.get(session)
         data['certificate'] = cert

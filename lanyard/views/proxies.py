@@ -30,10 +30,10 @@ from utils import get_shib_session, get_base_data
 def default(context, request):
     data = get_base_data(context, request)
     session = get_shib_session(request)
+    data['myproxyinfo'] = None
     if session:
         root = find_root(context)
         certificate = root.slcs.get(session)
-        data['myproxyinfo'] = None
         if certificate:
             data['myproxyinfo'] = context.myproxy_info(certificate)
 
